@@ -20,7 +20,7 @@ const handleRegistrationChange = (e) => {
 const handleRegistrationSubmit = async(e) => {
    e.preventDefault();
    try{
-    const response = await axios.post('http://localhost:8000/register',registrationData)
+    const response = await axios.post('https://mdbtt.onrender.com/register',registrationData)
     console.log(response.data);
    }
    catch(error){
