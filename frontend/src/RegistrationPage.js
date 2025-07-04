@@ -19,7 +19,7 @@ const RegistrationPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://mdbtt.onrender.com/register', {
+      const response = await fetch('https://mdrl7.onrender.com/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
