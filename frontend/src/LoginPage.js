@@ -1,65 +1,78 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
+  const [loginData, setLoginData] = useState({
+    username: '',
+    password: '',
+  });
 
-
-const [loginData,setLogindata]=useState({
-    username:'',
-    password:''
-})
-
-//submit function 
-const handleLoginSubmit = async (e) => {
+  // Submit function
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
-    try{
-      const response = await axios.post('https://mdbtt.onrender.com/login',loginData);
-      console.log(response.data);
+    try {
+      const response = await fetch('https://mdbtt.onrender.com/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: loginData.username,
+          password: loginData.password,
+        }),
+      });
+
+      const result = await response.json();
+      console.log('Login response:', result);
+
+      // Optionally handle successful login (e.g. redirect, store token, etc.)
+    } catch (error) {
+      console.error('Login error:', error);
     }
-    catch(error){
-       console.error('Login error',error)
-    }
-    setLogindata({
-        username:'',
-        password:''
-    })
-}
-const handleLoginChange = (e) =>{
-    const {name,value}=e.target;
-    setLogindata((prevData) =>({
-        ...prevData,
-        [name]:value
-    }))
-}
+
+    // Reset form
+    setLoginData({
+      username: '',
+      password: '',
+    });
+  };
+
+  // Handle input changes
+  const handleLoginChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
-   <div>
-    <h1>LoginPage</h1>
-    <form onSubmit={handleLoginSubmit}>
+    <div>
+      <h1>Login Page</h1>
+      <form onSubmit={handleLoginSubmit}>
         <input
-        type='text'
-        name='username'
-        placeholder='Username'
-        value={loginData.username}
-        onChange={handleLoginChange}
-        required
+          type='text'
+          name='username'
+          placeholder='Username'
+          value={loginData.username}
+          onChange={handleLoginChange}
+          required
         />
         <input
-        type='password'
-        name='password'
-        placeholder='Password'
-        value={loginData.password}
-        onChange={handleLoginChange}
-        required
+          type='password'
+          name='password'
+          placeholder='Password'
+          value={loginData.password}
+          onChange={handleLoginChange}
+          required
         />
         <button type='submit'>Login</button>
-        <p>Not Registered Yet?
-            <Link to ='/registration'>Register Here</Link>
+        <p>
+          Not Registered Yet?{' '}
+          <Link to='/registration'>Register Here</Link>
         </p>
-    </form>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
