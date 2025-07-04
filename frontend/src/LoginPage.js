@@ -12,7 +12,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://mdbtt.onrender.com/login', {
+      const response = await fetch('https://mdrl7.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
