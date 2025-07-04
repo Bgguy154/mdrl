@@ -10,7 +10,7 @@ app.use(express.json());
 
 //enable cors
 app.use(cors({
-  origin: 'http://localhost:3000', // your frontend URL
+  origin: 'https://mdrl-acjx.vercel.app', // your frontend URL
   credentials: true                // if using cookies or auth headers
 }));
 //registration
